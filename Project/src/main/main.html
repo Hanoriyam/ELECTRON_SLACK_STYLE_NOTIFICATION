@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('../asset/font/Poppins.ttf') format('truetype');
+        }
+
+        * {
+            font-family: 'Poppins';
+        }
+
+        .btn {
+            width: 250px;
+            height: 30px;
+        }
+
+        div {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 20px;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <button class="btn btnNotiTest1">Create Notification With Type 1</button>
+        <button class="btn btnCloseNotiWithType1">Close Notification Type 1</button>
+    </div>
+
+    <div>
+        <button class="btn btnNotiTest2">Create Notification With Type 2</button>
+        <button class="btn btnCloseNotiWithType2">Close Notification Type 2</button>
+    </div>
+
+    <div>
+        <button class="btn btnCloseAllNoti">Close All Noti</button>
+    </div>
+
+    <div>
+        <button class="btn btnTerminate">Terminate All Noti</button>
+    </div>
+
+    <script>
+        const btnNoti1 = document.querySelector('.btnNotiTest1');
+        const btnNoti2 = document.querySelector('.btnNotiTest2');
+        const btnCloseWithType1 = document.querySelector('.btnCloseNotiWithType1');
+        const btnCloseWithType2 = document.querySelector('.btnCloseNotiWithType2');
+        const btnCloseAllNoti = document.querySelector('.btnCloseAllNoti');
+        const btnTerminate = document.querySelector('.btnTerminate');
+
+        btnNoti1.addEventListener('click', () => {
+            ELECTRON_FUNC.RegisterNotification({
+                Message: 'Type 1 Test Message',
+                Type: 'type1',
+            });
+        });
+
+        btnNoti2.addEventListener('click', () => {
+            ELECTRON_FUNC.RegisterNotification({
+                Message: 'Type 2 Test Message',
+                Type: 'type2',
+            });
+        });
+
+        btnCloseWithType1.addEventListener('click', () => {
+            ELECTRON_FUNC.CloseNotiWithType('type1');
+        });
+
+        btnCloseWithType2.addEventListener('click', () => {
+            ELECTRON_FUNC.CloseNotiWithType('type2');
+        });
+
+        btnCloseAllNoti.addEventListener('click', ELECTRON_FUNC.CloseAllNotiWindow);
+        btnTerminate.addEventListener('click', ELECTRON_FUNC.TerminateNotiWindow);
+    </script>
+</body>
+
+</html>
